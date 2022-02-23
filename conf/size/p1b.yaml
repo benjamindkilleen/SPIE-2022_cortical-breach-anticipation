@@ -1,0 +1,6 @@
+# @package _global_
+
+dataset:
+  num_views: 6
+  progress_values: [0.3]
+  num_trajectories: 24

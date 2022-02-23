@@ -1,0 +1,15 @@
+torch
+torchvision
+pytorch-lightning
+hydra-core
+omegaconf
+numpy
+rich
+deepdrr==1.1.0a3
+
+# development
+black
+flake8
+pytest
+reorder-python-imports
+toml

@@ -1,0 +1,102 @@
+hydra:
+  run:
+    dir: ./results/${hydra.runtime.choices.experiment}/${now:%Y-%m-%d}/${now:%H-%M-%S}
+  sweep:
+    dir: ./results/${hydra.runtime.choices.experiment}/${now:%Y-%m-%d}/${now:%H-%M-%S}
+    subdir: ${hydra.job.num}_${hydra.job.override_dirname}
+  verbose:
+    - cortical_breach_detection
+
+defaults:
+  - experiment: train
+  - size: p1
+
+  # Use the configured logging.
+  - override hydra/job_logging: rich
+
+experiment:
+  seed: 1234
+  data: ${data}
+
+lr: 0.01
+momentum: 0.9
+root: ~/datasets
+gpus: 1
+checkpoint: null
+download: False
+overwrite: False
+
+data:
+  dataset: ${dataset}
+  batch_size: 64
+  num_workers: 12
+
+trainer:
+  gpus: ${gpus}
+  deterministic: true
+  auto_select_gpus: true
+  precision: 32 # augmentation requires 32 currently
+  resume_from_checkpoint: ${checkpoint}
+  max_epochs: 150
+
+dataset:
+  root: ${root}
+  max_startpoint_offset: 2
+  max_endpoint_offset: 25
+  cortical_breach_threshold: 1.50
+  num_breach_detection_points: 200 # 50
+  download: ${download}
+
+  # Control extent of randomness in view sampling
+  max_alpha_error: 10
+  max_beta_error: 10
+  max_isocenter_error: 25
+
+  generate: True
+  overwrite: ${overwrite}
+
+  carm:
+    min_alpha: -40
+    max_alpha: 110
+    min_beta: -90
+    max_beta: 90
+    degrees: true
+
+    # 4x subsampling
+    sensor_height: 384
+    sensor_width: 384
+    pixel_size: 0.776
+    # source_to_isocenter_vertical_distance: 700
+
+    # Not worried about going out of bounds.
+    enforce_isocenter_bounds: False
+
+  projector:
+    step: 0.1
+    spectrum: "90KV_AL40"
+    photon_count: 100000
+    scatter_num: 0
+    threads: 8
+    neglog: True
+    intensity_upper_bound: 10
+
+scheduler:
+  step_size: 50
+  gamma: 0.1
+  # patience: 25
+  # min_lr: 0.000001
+
+model:
+  lr: ${lr}
+  momentum: ${momentum}
+  scheduler: ${scheduler}
+  augmentation: ${augmentation}
+  encoder: resnet18
+  normalize: true # originally false
+
+# augmentation: null
+augmentation:
+  name: RandomAffine
+  degrees: 5
+  translate: [0.01, 0.01]
+  p: 0.5
