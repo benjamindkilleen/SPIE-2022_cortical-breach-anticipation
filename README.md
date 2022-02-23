@@ -2,9 +2,9 @@
 
 ![Data generation pipeline.](images/pipeline.png)
 
-# Cortical Breach Detection
+# Toward perception-based anticipation of cortical breach during K-wire fixation of the pelvis
 
-<!-- _[Read the paper](todo)._ -->
+<!-- _[Read the paper](https://spie.org/medical-imaging/presentation/Toward-perception-based-anticipation-of-cortical-breach-during-K-wire/12031-76)._ -->
 
 </div>
 
