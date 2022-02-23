@@ -32,15 +32,15 @@ These instructions assume you are using a linux machine with at least one GPU, C
 1. Create a new repository using this template and change to the root directory. For example,
 
    ```bash
-   git clone git@github.com:benjamindkilleen/cortical-breach-detection.git
-   cd cortical-breach-detection
+   git clone git@github.com:benjamindkilleen/SPIE-2022_cortical-breach-anticipation.git
+   cd SPIE-2022_cortical-breach-anticipation
    ```
 
 2. Install dependencies using [Anaconda](https://www.anaconda.com/):
 
    ```bash
    conda env create -f environment.yml
-   conda activate cortical-breach-detection
+   conda activate cortical-breach-anticipation
    ```
 
    This will create a new environment with the project installed as an edit-able package.

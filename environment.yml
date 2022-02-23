@@ -1,4 +1,4 @@
-name: cortical-breach-detection
+name: cortical-breach-anticipation
 channels:
   - pytorch
   - nvidia
